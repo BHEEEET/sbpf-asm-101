@@ -28,7 +28,7 @@ Raw data all sections
 objdump -s assembly101/hello_world/deploy/hello_world.so | less
 ```
 
-Disassamble `.text'section from the `.so`file:
+Disassamble `.text`section from the `.so`file:
 ```
 llvm-objdump -d --arch=bpf assembly101/hello_world/deploy/hello_world.so 
 ```
