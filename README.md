@@ -20,7 +20,7 @@ RUST_LOG=off sbpf test
 
 Dissasemble entire `.so` file:
 ```
-readelf -a assembly101/hello_world/deploy/hello_world.so 
+readelf -W -a assembly101/hello_world/deploy/hello_world.so 
 ```
 
 Raw data all sections
@@ -40,8 +40,9 @@ readelf -x .text   assembly101/hello_world/deploy/hello_world.so
 readelf -x .rodata  deploy/hello_world.so
 ```
 
+Reading sections addresses
 ```
-readelf -S assembly101/hello_world/deploy/hello_world.so
+readelf -W -S assembly101/hello_world/deploy/hello_world.so
 ```
 
 Reading section data using `llvm-objdump`
