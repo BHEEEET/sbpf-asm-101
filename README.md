@@ -1,6 +1,6 @@
 # Assembly 101
 
-This document provides a collection of commands and techniques for working with Solana BPF (SBF) shared object (`.so`) programs.
+This document provides a collection of commands and techniques for working with Solana BPF (SBPF) shared object (`.so`) programs.
 It covers installation, logging, debugging, disassembly, and basic hex editing. The goal is to give a practical reference for analyzing and modifying compiled Solana programs during development and testing.
 
 ---
@@ -126,4 +126,21 @@ Reconstruct the modified binary from the edited hex dump:
 
 ```bash
 xxd -r dump.hex > hello_world_patched.so
+```
+
+### ezBPF CLI
+Easy sBPF disassembler:
+
+Install:
+```
+cargo install --git https://github.com/deanmlittle/ezbpf
+```
+
+Disassemble command:
+```
+ezbpf hello_world.so
+
+or dump to json
+
+ezbpf hello_world.so > dump.json
 ```
