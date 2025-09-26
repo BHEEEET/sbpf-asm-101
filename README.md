@@ -33,23 +33,18 @@ Disassamble `.text`section from the `.so`file:
 llvm-objdump -d --arch=bpf assembly101/hello_world/deploy/hello_world.so 
 ```
 
-raw `.text`section
+raw section data
 ```
 readelf -x .text   assembly101/hello_world/deploy/hello_world.so
+
+readelf -x .rodata  deploy/hello_world.so
 ```
 
 ```
 readelf -S assembly101/hello_world/deploy/hello_world.so
 ```
 
-reading .rodata
+Reading section data using `llvm-objdump`
 ```
 llvm-objdump -s --section=.rodata --arch=bpf assembly101/hello_world/deploy/hello_world.so
-
-or
-
-readelf -x .rodata assembly101/hello_world/deploy/hello_world.so | less
-
 ```
-
-
