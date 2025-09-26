@@ -137,10 +137,10 @@ cargo install --git https://github.com/deanmlittle/ezbpf
 ```
 
 Disassemble command:
-```
+```bash
 ezbpf hello_world.so
 
-or dump to json
+# or dump to json
 
 ezbpf hello_world.so > dump.json
 ```
