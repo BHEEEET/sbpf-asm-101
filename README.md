@@ -49,3 +49,19 @@ Reading section data using `llvm-objdump`
 ```
 llvm-objdump -s --section=.rodata --arch=bpf assembly101/hello_world/deploy/hello_world.so
 ```
+## Hex editing
+Read hex data
+```
+xxd hello_world.so
+```
+
+Dump hex data:
+```
+xxd hello_world.so > dump.hex
+```
+no you can edit the hex in a editor
+
+Convert back
+```
+xxd -r dump.hex > hello_world_patched.so
+```
