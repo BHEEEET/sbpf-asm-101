@@ -1,8 +1,9 @@
-Got it — here’s your notes reorganized with a **table of contents** and clean sectioning:
+# Assembly 101
+
+This document provides a collection of commands and techniques for working with Solana BPF (SBF) shared object (`.so`) programs.
+It covers installation, logging, debugging, disassembly, and basic hex editing. The goal is to give a practical reference for analyzing and modifying compiled Solana programs during development and testing.
 
 ---
-
-# Assembly 101
 
 ## Table of Contents
 
@@ -22,6 +23,8 @@ Got it — here’s your notes reorganized with a **table of contents** and clea
 
 ## Installation
 
+Install the Solana BPF tooling from source:
+
 ```bash
 cargo install --git https://github.com/blueshift-gg/sbpf.git
 ```
@@ -30,13 +33,13 @@ cargo install --git https://github.com/blueshift-gg/sbpf.git
 
 ## Logging
 
-Enable logging:
+Enable program logging with:
 
 ```bash
 RUST_LOG=debug sbpf test
 ```
 
-Disable logging:
+Disable logging with:
 
 ```bash
 RUST_LOG=off sbpf test
@@ -48,11 +51,15 @@ RUST_LOG=off sbpf test
 
 ### Disassemble entire `.so` file
 
+Dump ELF headers, sections, and program information:
+
 ```bash
 readelf -W -a deploy/hello_world.so
 ```
 
 ### Dump raw data of all sections
+
+View the raw byte contents of each section:
 
 ```bash
 objdump -s deploy/hello_world.so | less
@@ -60,11 +67,15 @@ objdump -s deploy/hello_world.so | less
 
 ### Disassemble `.text` section
 
+Disassemble executable instructions in the `.text` section for the BPF target:
+
 ```bash
 llvm-objdump -d --arch=bpf deploy/hello_world.so
 ```
 
 ### Read raw section data
+
+Inspect specific section data in hexadecimal form:
 
 ```bash
 readelf -x .text deploy/hello_world.so
@@ -73,11 +84,15 @@ readelf -x .rodata deploy/hello_world.so
 
 ### Read section headers with addresses
 
+Display section headers, offsets, and virtual memory addresses:
+
 ```bash
 readelf -W -S deploy/hello_world.so
 ```
 
 ### Read section data with llvm-objdump
+
+Dump section contents using LLVM’s objdump:
 
 ```bash
 llvm-objdump -s --section=.rodata --arch=bpf deploy/hello_world.so
@@ -89,19 +104,25 @@ llvm-objdump -s --section=.rodata --arch=bpf deploy/hello_world.so
 
 ### View hex data
 
+Display the binary file in hexadecimal:
+
 ```bash
 xxd hello_world.so
 ```
 
 ### Dump hex data to a file
 
+Export a hex dump to an editable file:
+
 ```bash
 xxd hello_world.so > dump.hex
 ```
 
-Edit `dump.hex` in any hex editor to modify bytes.
+Edit `dump.hex` in a text or hex editor to modify specific bytes.
 
 ### Convert back to binary
+
+Reconstruct the modified binary from the edited hex dump:
 
 ```bash
 xxd -r dump.hex > hello_world_patched.so
